@@ -1,2 +1,3 @@
-# tinker_messages
+# Tinker Records
+
 Message structs and types for tinker
