@@ -23,8 +23,8 @@ pub enum Value {
 /// Each message is made up of a header and value
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Message {
-    header: Header,
-    value: Value
+    pub header: Header,
+    pub value: Value
 }
 
 // --------------------------------------------------
