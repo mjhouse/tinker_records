@@ -86,6 +86,13 @@ impl Message {
         }
     }
 
+    pub fn Disconnect(id: i32, entity: CharacterSelect) -> Self {
+        Self {
+            header: Header::new(id),
+            value: Value::Disconnect(ConnectMessage { entity })
+        }
+    }
+
     pub fn Attack(id: i32, target: i32, ability: i32) -> Self {
         Self {
             header: Header::new(id),
