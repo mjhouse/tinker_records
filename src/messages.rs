@@ -18,6 +18,7 @@ pub enum Value {
     Attack(AttackMessage),
     Initial(InitialMessage),
     Connect(ConnectMessage),
+    Disconnect(ConnectMessage),
 }
 
 /// Each message is made up of a header and value
