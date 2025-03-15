@@ -3,34 +3,12 @@ use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 
 // ------------------------------------------------
-// Accounts
-#[derive(Queryable, Insertable)]
-#[diesel(table_name = crate::schema::accounts)]
-#[diesel(check_for_backend(diesel::pg::Pg))]
-pub struct AccountInsert {
-    pub username: String,
-    pub password: String,
-}
-
-#[derive(Queryable, Selectable)]
-#[diesel(table_name = crate::schema::accounts)]
-#[diesel(check_for_backend(diesel::pg::Pg))]
-pub struct AccountSelect {
-    pub id: i32,
-    pub username: String,
-    pub password: String,
-    pub created: DateTime<Utc>,
-}
-// ------------------------------------------------
-
-// ------------------------------------------------
 // Characters
 #[derive(Queryable, Insertable)]
 #[diesel(table_name = crate::schema::characters)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CharacterInsert {
-    pub name: String,
-    pub account_id: i32,
+    pub username: String
 }
 
 #[derive(Queryable, Selectable, Clone, Serialize, Deserialize, Default, Debug)]
@@ -38,12 +16,12 @@ pub struct CharacterInsert {
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CharacterSelect {
     pub id: i32,
-    pub name: String,
+    pub username: String,
     pub created: DateTime<Utc>,
-    pub account_id: i32,
     pub x: f32,
     pub y: f32,
     pub modified: DateTime<Utc>,
+    pub password: String,
 }
 // ------------------------------------------------
 
