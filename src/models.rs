@@ -8,7 +8,8 @@ use serde::{Deserialize, Serialize};
 #[diesel(table_name = crate::schema::characters)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct CharacterInsert {
-    pub username: String
+    pub username: String,
+    pub password: String
 }
 
 #[derive(Queryable, Selectable, Clone, Serialize, Deserialize, Default, Debug)]
