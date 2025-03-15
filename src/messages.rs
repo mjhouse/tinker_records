@@ -1,3 +1,4 @@
+use glam::Vec2;
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 use uuid::Uuid;
@@ -43,8 +44,8 @@ pub struct ConnectMessage {
 #[derive(Clone, Serialize, Deserialize, Default, Debug)]
 pub struct MoveMessage {
     pub speed: f32,
-    pub x: f32,
-    pub y: f32,
+    pub target: Vec2,
+    pub current: Vec2,
 }
 
 #[derive(Clone, Serialize, Deserialize, Default, Debug)]
@@ -63,11 +64,11 @@ impl Header {
 
 impl Message {
 
-    pub fn Move(id: i32, speed: f32, x: f32, y: f32) -> Self {
+    pub fn Move(id: i32, speed: f32, target: Vec2, current: Vec2) -> Self {
         Self {
             header: Header::new(id),
             value: Value::Move(MoveMessage {
-                speed, x, y
+                speed, target, current
             })
         }
     }
@@ -121,14 +122,14 @@ mod tests {
 
     #[test]
     fn test_serialize_message() {
-        let message = Message::Move(0,1.0,2.0,3.0);
+        let message = Message::Move(0,1.0,Vec2::new(2.0,3.0),Vec2::new(2.0,3.0));
         let result = message.serialize();
         assert!(result.is_ok());
     }
 
     #[test]
     fn test_deserialize_message() {
-        let message = Message::Move(0,1.0,2.0,3.0);
+        let message = Message::Move(0,1.0,Vec2::new(2.0,3.0),Vec2::new(2.0,3.0));
         let result = message.serialize();
         assert!(result.is_ok());
 
